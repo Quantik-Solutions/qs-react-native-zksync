@@ -33,4 +33,6 @@ members = [
 
     # SDK section
     "sdk/zksync-rs",
+#    "sdk/zksync-java",
 ]
+exclude = ["sdk/zksync-java"]
