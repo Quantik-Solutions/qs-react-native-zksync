@@ -5,7 +5,6 @@ use franklin_crypto::bellman::pairing::ff::{self, PrimeField, PrimeFieldRepr};
 use franklin_crypto::eddsa::PrivateKey;
 use rand::{Rng, SeedableRng, XorShiftRng};
 use zksync_types::{tx::TxSignature, PubKeyHash};
-
 fn gen_private_key_and_its_be_bytes() -> (PrivateKey<Engine>, Vec<u8>) {
   let mut rng = XorShiftRng::from_seed([1, 2, 3, 4]);
 
@@ -54,10 +53,12 @@ fn test_signature() {
   for msg_len in &[0, 2, 4, 5, 32, 128] {
     let msg = random_msg(*msg_len);
 
-    let wasm_signature = sign_musig(&serialized_pk, &msg);
+    let wasm_signature = sign_musig(&serialized_pk.clone(), &msg.clone());
 
-    let wasm_unpacked_signature = TxSignature::deserialize_from_packed_bytes(&wasm_signature)
-      .expect("failed to unpack signature");
+    let wasm_unpacked_signature = TxSignature::deserialize_from_packed_bytes(
+      &hex::decode(wasm_signature.clone()).expect("Couldn't decode the test signature"),
+    )
+    .expect("failed to unpack signature");
 
     let signer_pubkey = wasm_unpacked_signature.verify_musig(&msg);
     assert_eq!(

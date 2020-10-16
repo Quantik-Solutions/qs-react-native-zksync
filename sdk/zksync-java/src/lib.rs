@@ -22,12 +22,13 @@ use franklin_crypto::{
 };
 
 use crate::utils::{pub_key_hash, rescue_hash_tx_msg};
-pub use crypto_lib::public_key_from_private;
+// use crypto_lib::public_key_from_private;
 use franklin_crypto::bellman::pairing::ff::{PrimeField, PrimeFieldRepr};
 use sha2::{Digest, Sha256};
 use zksync_types::PubKeyHash;
 
 pub fn private_key_from_seed(seed: &[u8]) -> String {
+  seed.to_owned();
   if seed.len() < 32 {
     panic!("Seed is too short");
   };
@@ -55,6 +56,7 @@ pub fn private_key_from_seed(seed: &[u8]) -> String {
 }
 
 fn read_signing_key(private_key: &[u8]) -> PrivateKey<Engine> {
+  private_key.to_owned();
   let mut fs_repr = FsRepr::default();
   fs_repr
     .read_be(private_key)
@@ -63,6 +65,7 @@ fn read_signing_key(private_key: &[u8]) -> PrivateKey<Engine> {
 }
 
 fn privkey_to_pubkey_internal(private_key: &[u8]) -> PublicKey<Engine> {
+  private_key.to_owned();
   let p_g = FixedGenerators::SpendingKeyGenerator;
 
   let sk = read_signing_key(private_key);
@@ -71,6 +74,7 @@ fn privkey_to_pubkey_internal(private_key: &[u8]) -> PublicKey<Engine> {
 }
 
 pub fn private_key_to_pubkey_hash(private_key: &[u8]) -> String {
+  private_key.to_owned();
   PubKeyHash::from_bytes(&pub_key_hash(&privkey_to_pubkey_internal(private_key)))
     .unwrap()
     .to_hex()
@@ -94,6 +98,8 @@ pub fn private_key_to_pubkey_hash(private_key: &[u8]) -> String {
 /// [32..64] - packed r point of the signature.
 /// [64..96] - s poing of the signature.
 pub fn sign_musig(private_key: &[u8], msg: &[u8]) -> String {
+  private_key.to_owned();
+  msg.to_owned();
   let mut packed_full_signature = Vec::with_capacity(PACKED_POINT_SIZE + PACKED_SIGNATURE_SIZE);
   //
   let p_g = FixedGenerators::SpendingKeyGenerator;
@@ -132,4 +138,9 @@ pub fn sign_musig(private_key: &[u8], msg: &[u8]) -> String {
   );
 
   hex::encode(&packed_full_signature)
+}
+
+// TODO: Finish building out the interface
+pub fn pub_key_from_private() {
+  // private_key.to_owned();
 }

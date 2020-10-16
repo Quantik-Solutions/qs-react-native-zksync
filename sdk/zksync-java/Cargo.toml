@@ -5,8 +5,8 @@ authors = ["Nicholas Vincent <emailnjv@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "zksyncsign"
-crate-type = ["staticlib", "cdylib"]
+name = "zksync"
+crate-type = ["cdylib", "staticlib"]
 
 [dependencies]
 franklin_crypto = { package = "franklin-crypto", git = "https://github.com/matter-labs/franklin-crypto.git", branch="check-franklin-circuit-transpile"}

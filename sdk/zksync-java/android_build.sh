@@ -8,8 +8,8 @@ cargo ndk --target i686-linux-android --android-platform ${min_ver} -- build --r
 cargo ndk --target x86_64-linux-android --android-platform ${min_ver} -- build --release
 # moving libraries to the android project
 
-jniLibs=../../../Marco/NumioPay/zksyncsign/src/main/jniLibs
-libName=libzksyncsign.so
+jniLibs=../../../android/src/main/jniLibs
+libName=libzksync.so
 
 rm -rf ${jniLibs}
 
