@@ -38,9 +38,11 @@ public class ZkSyncModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void pKeyToPubKeyHash(String pKey, Promise promise) {
         try {
-            ZkSync.main(new String[]{"PKEY_TO_PUBKEY_HASH", pKey});
+
+            ZkSync zkSync = new ZkSync();
+            zkSync.setPromise((PromiseImpl) promise);
+            zkSync.privateKeyToPublicKeyHash(pKey);
 //            String hexHash = privateKeyToPublicKeyHash(pKey);
-            promise.resolve(true);
         } catch (Error e) {
             promise.reject(e);
         }

@@ -28,7 +28,11 @@ export default class App extends Component<{}> {
   };
 
   pubKeyHashFromPKey = async (pKey) => {
-    return await ZkSync.pKeyToPubKeyHash(pKey);
+    try {
+      return await ZkSync.pKeyToPubKeyHash(pKey);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {

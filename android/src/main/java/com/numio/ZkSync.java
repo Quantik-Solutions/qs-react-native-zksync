@@ -1,29 +1,28 @@
 package com.numio;
+import com.facebook.react.bridge.PromiseImpl;
 
 public class ZkSync {
-    private static native void privateKeyToPublicKeyHash(ZkSync callback, String privateKey);
-    private PromiseInterface promise;
+//
+//    public ZkSync(PromiseImpl ogPromise) {
+//        promise = ogPromise;
+//    }
 
+    private static native void privateKeyToPublicKeyHash(ZkSync callback, String privateKey);
+
+    public void setPromise(PromiseImpl promise) {
+        this.promise = promise;
+    }
+
+    private PromiseImpl promise;
     enum FunctionEnum {
         PKEY_TO_PUBKEY_HASH
     }
 
-    interface PromiseInterface {
-        void resolve(String result);
-        void reject(String result);
-    }
-
-    public static void main(String[] args) {
-        if (args.length > 1) {
-            FunctionEnum functionEnum = FunctionEnum.valueOf(args[0]);
-            switch (functionEnum) {
-                case PKEY_TO_PUBKEY_HASH:
-                    ZkSync.privateKeyToPublicKeyHash(new ZkSync(), args[1]);
-            }
-        }
+    public void privateKeyToPublicKeyHash(String privateKey) {
+        ZkSync.privateKeyToPublicKeyHash(this, privateKey);
     }
 
     public void resolveCallback(String result) {
-        System.out.println(result);
+       promise.resolve(result);
     }
 }
