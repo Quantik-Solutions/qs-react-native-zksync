@@ -1,7 +1,7 @@
 package com.numio;
 
 import com.facebook.react.bridge.*;
-
+import com.numio.ZkSync;
 public class ZkSyncModule extends ReactContextBaseJavaModule {
     private static native String privateKeyFromSeed(final String input);
     private static native String privateKeyToPublicKeyHash(final String input);
@@ -25,21 +25,22 @@ public class ZkSyncModule extends ReactContextBaseJavaModule {
         callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
     }
 
-    @ReactMethod
-    public void pKeyFromSeed(String hexSeed, Promise promise) {
-        try {
-            String hexPKey = privateKeyFromSeed(hexSeed);
-            promise.resolve(hexPKey);
-        } catch (Error e) {
-            promise.reject(e);
-        }
-    }
+//    @ReactMethod
+//    public void pKeyFromSeed(String hexSeed, Promise promise) {
+//        try {
+//            String hexPKey = privateKeyFromSeed(hexSeed);
+//            promise.resolve(hexPKey);
+//        } catch (Error e) {
+//            promise.reject(e);
+//        }
+//    }
 
     @ReactMethod
     public void pKeyToPubKeyHash(String pKey, Promise promise) {
         try {
-            String hexHash = privateKeyToPublicKeyHash(pKey);
-            promise.resolve(hexHash);
+            ZkSync.main(new String[]{"PKEY_TO_PUBKEY_HASH", pKey});
+//            String hexHash = privateKeyToPublicKeyHash(pKey);
+            promise.resolve(true);
         } catch (Error e) {
             promise.reject(e);
         }

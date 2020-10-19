@@ -37,17 +37,17 @@ export default class App extends Component<{}> {
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
         <Button
-          title="privateKeyFromSeed"
-          onPress={async () =>
-            console.log(await this.privateKeyFromSeed(hexSeed))
-          }
-        />
-        <Button
-          title="privateKeyFromSeed"
+          title="pubKeyHash"
           onPress={async () =>
             console.log(await this.pubKeyHashFromPKey(hexPrivateKey))
           }
         />
+        {/*<Button*/}
+        {/*  title="privateKeyFromSeed"*/}
+        {/*  onPress={async () =>*/}
+        {/*    console.log(await this.pubKeyHashFromPKey(hexPrivateKey))*/}
+        {/*  }*/}
+        {/*/>*/}
       </View>
     );
   }
