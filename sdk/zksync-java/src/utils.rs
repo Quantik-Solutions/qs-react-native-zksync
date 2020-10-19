@@ -1,5 +1,5 @@
-use crate::RESCUE_PARAMS;
-use crate::{Engine, Fr};
+use crate::sign::RESCUE_PARAMS;
+use crate::sign::{Engine, Fr};
 use franklin_crypto::{
   bellman::{pairing::ff::PrimeField, BitIterator},
   circuit::multipack,

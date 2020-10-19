@@ -6,7 +6,7 @@ edition = "2018"
 
 [lib]
 name = "zksync"
-crate-type = ["cdylib", "staticlib"]
+crate-type = ["cdylib"]
 
 [dependencies]
 franklin_crypto = { package = "franklin-crypto", git = "https://github.com/matter-labs/franklin-crypto.git", branch="check-franklin-circuit-transpile"}
@@ -19,7 +19,7 @@ openssl = { version = "0.10", features = ["vendored"] }
 
 crypto_lib = { package = "zksync_crypto", path = "../../core/lib/crypto" }
 
-[target.'cfg(target_os = "android")'.dependencies]
+#[target.'cfg(target_os = "android")'.dependencies]
 jni = { version = "0.17.0", default-features = true }
 
 [dev-dependencies]

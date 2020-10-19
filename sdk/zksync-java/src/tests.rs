@@ -1,4 +1,4 @@
-use super::{private_key_from_seed, private_key_to_pubkey_hash, read_signing_key, sign_musig};
+use crate::sign::{private_key_from_seed, private_key_to_pubkey_hash, read_signing_key, sign_musig};
 
 use crypto_lib::{public_key_from_private, Engine};
 use franklin_crypto::bellman::pairing::ff::{self, PrimeField, PrimeFieldRepr};
