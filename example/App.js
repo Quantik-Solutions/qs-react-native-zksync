@@ -43,32 +43,55 @@ export default class App extends Component<{}> {
     }
   };
 
+  pubKeyFromPKey = async (pKey) => {
+    try {
+      return await ZkSync.publicKeyFromPrivateKey(pKey);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
-        <Button
-          style={styles.btn}
-          title="pub Key Hash"
-          onPress={async () =>
-            console.log(await this.pubKeyHashFromPKey(hexPrivateKey))
-          }
-        />
-        <Button
-          style={styles.btn}
-          title="sign musig"
-          onPress={async () =>
-            console.log(await this.signMusig(hexPrivateKey, hexSeed))
-          }
-        />
-        <Button
-          style={styles.btn}
-          title="seed to pkey"
-          onPress={async () =>
-            console.log(await this.privateKeyFromSeed(hexSeed))
-          }
-        />
+        <View style={styles.btnWrapper}>
+          <Button
+            style={styles.btn}
+            title="pub Key Hash"
+            onPress={async () =>
+              console.log(await this.pubKeyHashFromPKey(hexPrivateKey))
+            }
+          />
+        </View>
+        <View style={styles.btnWrapper}>
+          <Button
+            style={styles.btn}
+            title="sign musig"
+            onPress={async () =>
+              console.log(await this.signMusig(hexPrivateKey, hexSeed))
+            }
+          />
+        </View>
+        <View style={styles.btnWrapper}>
+          <Button
+            style={styles.btn}
+            title="seed to pkey"
+            onPress={async () =>
+              console.log(await this.privateKeyFromSeed(hexSeed))
+            }
+          />
+        </View>
+        <View style={styles.btnWrapper}>
+          <Button
+            style={styles.btn}
+            title="pkey to pubkey"
+            onPress={async () =>
+              console.log(await this.pubKeyFromPKey(hexPrivateKey))
+            }
+          />
+        </View>
       </View>
     );
   }
@@ -91,7 +114,7 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  btn: {
+  btnWrapper: {
     margin: 10,
   },
 });

@@ -54,4 +54,15 @@ public class ZkSyncModule extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
     }
+
+    @ReactMethod
+    public void publicKeyFromPrivateKey(String privateKey, Promise promise) {
+        try {
+            ZkSync zkSync = new ZkSync();
+            zkSync.setPromise((PromiseImpl) promise);
+            zkSync.publicKeyFromPrivateKey(privateKey);
+        } catch (Error e) {
+            promise.reject(e);
+        }
+    }
 }

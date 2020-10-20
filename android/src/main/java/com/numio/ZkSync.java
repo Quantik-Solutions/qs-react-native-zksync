@@ -5,6 +5,7 @@ public class ZkSync {
     private static native void publicKeyHashFromPrivateKey(ZkSync callback, String privateKey);
     private static native void signMusig(ZkSync callback, String privateKey, String txnMsg);
     private static native void privateKeyFromSeed(ZkSync callback, String seed);
+    private static native void publicKeyFromPrivateKey(ZkSync callback, String privateKey);
 
     private PromiseImpl promise;
 
@@ -22,6 +23,11 @@ public class ZkSync {
 
     public void privateKeyFromSeed(String seed) {
         ZkSync.privateKeyFromSeed(this, seed);
+    }
+
+
+    public void publicKeyFromPrivateKey(String privateKey) {
+        ZkSync.publicKeyFromPrivateKey(this, privateKey);
     }
 
     public void resolveCallback(String result) {
