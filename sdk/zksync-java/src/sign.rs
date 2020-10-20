@@ -72,16 +72,16 @@ pub fn private_key_to_pubkey_hash(private_key: &[u8]) -> String {
     .to_hex()
 }
 
-// pub fn private_key_to_pubkey(private_key: &[u8]) -> Vec<u8> {
-//   let mut pubkey_buf = Vec::with_capacity(PACKED_POINT_SIZE);
-//   let pubkey = privkey_to_pubkey_internal(private_key);
-//
-//   pubkey
-//     .write(&mut pubkey_buf)
-//     .expect("failed to write pubkey to buffer");
-//
-//   pubkey_buf
-// }
+pub fn private_key_to_pubkey(private_key: &[u8]) -> String {
+  let mut pubkey_buf = Vec::with_capacity(PACKED_POINT_SIZE);
+  let pubkey = privkey_to_pubkey_internal(private_key);
+
+  pubkey
+    .write(&mut pubkey_buf)
+    .expect("failed to write pubkey to buffer");
+
+  hex::encode(pubkey_buf)
+}
 
 /// We use musig Schnorr signature scheme.
 /// It is impossible to restore signer for signature, that is why we provide public key of the signer
