@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import ZkSync from 'react-native-zksync';
+import ZkSync from '@quantik-solutions/react-native-zksync';
 
 const hexPrivateKey =
   '0166c0b613d99406d577ebbb582ede3086ce86423d0a61f4c3864d2ca392f496';
