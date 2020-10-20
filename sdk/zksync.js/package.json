@@ -1,7 +1,14 @@
 {
-    "name": "zksync",
-    "version": "0.7.5",
+    "name": "@teamnumio/zksync",
+    "version": "0.0.13",
     "license": "MIT",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/TeamNumio"
+    },
+    "repository": {
+        "type": "git",
+        "url": "ssh://git@github.com:TeamNumio/zksync.git"
+    },
     "main": "build/index.js",
     "types": "build/index.d.ts",
     "dependencies": {
