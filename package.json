@@ -1,7 +1,7 @@
 {
-  "name": "react-native-zksync",
+  "name": "@quantik-solutions/react-native-zksync",
   "title": "React Native Zksync",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "TODO",
   "main": "index.js",
   "files": [
@@ -16,8 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emailnjv/react-native-zksync.git",
-    "baseUrl": "https://github.com/emailnjv/react-native-zksync"
+    "url": "git+https://github.com/Quantik-Solutions/react-native-zksync.git",
+    "baseUrl": "https://github.com/Quantik-Solutions/react-native-zksync"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/Quantik-Solutions"
   },
   "keywords": [
     "react-native"
