@@ -2,24 +2,26 @@ package com.numio;
 import com.facebook.react.bridge.PromiseImpl;
 
 public class ZkSync {
-//
-//    public ZkSync(PromiseImpl ogPromise) {
-//        promise = ogPromise;
-//    }
+    private static native void publicKeyHashFromPrivateKey(ZkSync callback, String privateKey);
+    private static native void signMusig(ZkSync callback, String privateKey, String txnMsg);
+    private static native void privateKeyFromSeed(ZkSync callback, String seed);
 
-    private static native void privateKeyToPublicKeyHash(ZkSync callback, String privateKey);
+    private PromiseImpl promise;
 
     public void setPromise(PromiseImpl promise) {
         this.promise = promise;
     }
 
-    private PromiseImpl promise;
-    enum FunctionEnum {
-        PKEY_TO_PUBKEY_HASH
+    public void publicKeyHashFromPrivateKey(String privateKey) {
+        ZkSync.publicKeyHashFromPrivateKey(this, privateKey);
     }
 
-    public void privateKeyToPublicKeyHash(String privateKey) {
-        ZkSync.privateKeyToPublicKeyHash(this, privateKey);
+    public void signMusig(String privateKey, String txnMsg) {
+        ZkSync.signMusig(this, privateKey, txnMsg);
+    }
+
+    public void privateKeyFromSeed(String seed) {
+        ZkSync.privateKeyFromSeed(this, seed);
     }
 
     public void resolveCallback(String result) {

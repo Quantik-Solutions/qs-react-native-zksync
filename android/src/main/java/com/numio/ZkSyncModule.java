@@ -3,9 +3,6 @@ package com.numio;
 import com.facebook.react.bridge.*;
 import com.numio.ZkSync;
 public class ZkSyncModule extends ReactContextBaseJavaModule {
-    private static native String privateKeyFromSeed(final String input);
-    private static native String privateKeyToPublicKeyHash(final String input);
-
     private final ReactApplicationContext reactContext;
 
     public ZkSyncModule(ReactApplicationContext reactContext) {
@@ -25,24 +22,34 @@ public class ZkSyncModule extends ReactContextBaseJavaModule {
         callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
     }
 
-//    @ReactMethod
-//    public void pKeyFromSeed(String hexSeed, Promise promise) {
-//        try {
-//            String hexPKey = privateKeyFromSeed(hexSeed);
-//            promise.resolve(hexPKey);
-//        } catch (Error e) {
-//            promise.reject(e);
-//        }
-//    }
-
     @ReactMethod
-    public void pKeyToPubKeyHash(String pKey, Promise promise) {
+    public void publicKeyHashFromPrivateKey(String pKey, Promise promise) {
         try {
-
             ZkSync zkSync = new ZkSync();
             zkSync.setPromise((PromiseImpl) promise);
-            zkSync.privateKeyToPublicKeyHash(pKey);
-//            String hexHash = privateKeyToPublicKeyHash(pKey);
+            zkSync.publicKeyHashFromPrivateKey(pKey);
+        } catch (Error e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void signMusig(String pKey, String txnMsg, Promise promise) {
+        try {
+            ZkSync zkSync = new ZkSync();
+            zkSync.setPromise((PromiseImpl) promise);
+            zkSync.signMusig(pKey, txnMsg);
+        } catch (Error e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void privateKeyFromSeed(String seed, Promise promise) {
+        try {
+            ZkSync zkSync = new ZkSync();
+            zkSync.setPromise((PromiseImpl) promise);
+            zkSync.privateKeyFromSeed(seed);
         } catch (Error e) {
             promise.reject(e);
         }

@@ -24,12 +24,20 @@ export default class App extends Component<{}> {
   }
 
   privateKeyFromSeed = async (seed) => {
-    return await ZkSync.pKeyFromSeed(seed);
+    return await ZkSync.privateKeyFromSeed(seed);
   };
 
   pubKeyHashFromPKey = async (pKey) => {
     try {
-      return await ZkSync.pKeyToPubKeyHash(pKey);
+      return await ZkSync.publicKeyHashFromPrivateKey(pKey);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  signMusig = async (pKey, hexTxnMsg) => {
+    try {
+      return await ZkSync.signMusig(pKey, hexTxnMsg);
     } catch (e) {
       console.log(e);
     }
@@ -41,17 +49,26 @@ export default class App extends Component<{}> {
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
         <Button
-          title="pubKeyHash"
+          style={styles.btn}
+          title="pub Key Hash"
           onPress={async () =>
             console.log(await this.pubKeyHashFromPKey(hexPrivateKey))
           }
         />
-        {/*<Button*/}
-        {/*  title="privateKeyFromSeed"*/}
-        {/*  onPress={async () =>*/}
-        {/*    console.log(await this.pubKeyHashFromPKey(hexPrivateKey))*/}
-        {/*  }*/}
-        {/*/>*/}
+        <Button
+          style={styles.btn}
+          title="sign musig"
+          onPress={async () =>
+            console.log(await this.signMusig(hexPrivateKey, hexSeed))
+          }
+        />
+        <Button
+          style={styles.btn}
+          title="seed to pkey"
+          onPress={async () =>
+            console.log(await this.privateKeyFromSeed(hexSeed))
+          }
+        />
       </View>
     );
   }
@@ -73,5 +90,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  btn: {
+    margin: 10,
   },
 });
