@@ -23,7 +23,6 @@ use sha2::{Digest, Sha256};
 use zksync_types::PubKeyHash;
 
 pub fn private_key_from_seed(seed: &[u8]) -> String {
-  seed.to_owned();
   if seed.len() < 32 {
     panic!("Seed is too short");
   };
