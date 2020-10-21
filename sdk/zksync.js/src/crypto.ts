@@ -9,9 +9,9 @@ export async function privateKeyFromSeed(privateKey: Uint8Array): Promise<Uint8A
 
 // TODO: Check this, the substr in between what seems to be concatenated strings
 export async function signTransactionBytes(privKey: Uint8Array, bytes: Uint8Array): Promise<Signature> {
-    const signaturePacked = await ZkSync.signMusig(utils.toUtf8String(privKey), utils.toUtf8String(bytes));
-    const pubKey = signaturePacked.slice(0, 30);
-    const signature = signaturePacked.slice(30);
+    const signaturePacked = await ZkSync.signMusig(utils.hexlify(privKey).substr(2), utils.hexlify(bytes).substr(2));
+    const pubKey = utils.hexlify(utils.arrayify(`$0x{signaturePacked}`).slice(0, 32)).substr(2)
+    const signature = utils.hexlify(utils.arrayify(`$0x{signaturePacked}`).slice(32)).substr(2)
     return {
         pubKey,
         signature
