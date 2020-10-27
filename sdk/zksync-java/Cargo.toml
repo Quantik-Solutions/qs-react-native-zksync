@@ -23,7 +23,6 @@ crypto_lib = { package = "zksync_crypto", path = "../../core/lib/crypto" }
 jni = { version = "0.17.0", default-features = true }
 
 [dev-dependencies]
-wasm-bindgen-test = "0.2"
 zksync_types = { path = "../../core/lib/types" }
 
 [profile.release]
