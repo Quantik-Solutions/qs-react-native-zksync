@@ -1,22 +1,12 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import ZkSync from '@quantik-solutions/react-native-zksync';
-
-const hexPrivateKey =
-  '0166c0b613d99406d577ebbb582ede3086ce86423d0a61f4c3864d2ca392f496';
-const hexSeed = '199659b1c85eb4048e5d47620669492f6ed38194530e023d8c8e161aa72db3a32ebec7e33bbe7bec10a61531c87595bd15681ad1756cb1a74d6426e0b513cd151c';
-
-const verifiedPKey = "03853bd993011bfdb9d0a8bbac8c751c5a82dd69c6c28fcf4e6d43ffeef7e77e"
-const verifiedMsgByte = "07000000872a4bf836d0ab56e07e5fa1d773c27026e86ca21f24123639df1c980fb6f9782d15908406410c272400011b8f00000000";
-const verifiedSignatureResult = "b16b44d5fbc4bd7689b3f5e8344a1dada5cd9202f4411a705bd545f585b48b232f58d00392f0f7420fa13c7b4b3f8b278774c4a50aef1521afd54f3e51f9e91f7f4a1271141f0a3d439b0b856082fcc38f68bfd62855030f126e4e1019a5cc04";
-const verifiedPubKeyHash = "b16b44d5fbc4bd7689b3f5e8344a1dada5cd9202f4411a705bd545f585b48b23";
-const verifiedSignature = "2f58d00392f0f7420fa13c7b4b3f8b278774c4a50aef1521afd54f3e51f9e91f7f4a1271141f0a3d439b0b856082fcc38f68bfd62855030f126e4e1019a5cc04";
-const correctPubKeyHash = '7731c2c99f46cc2f7f5e564ffd8f5e17e0a8160b';
+import TestData from './testData.json';
 
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
-    message: '--',
+    message: '',
   };
 
   componentDidMount() {
@@ -29,12 +19,20 @@ export default class App extends Component<{}> {
   }
 
   privateKeyFromSeed = async (seed) => {
-    return await ZkSync.privateKeyFromSeed(seed);
+    let result = await ZkSync.privateKeyFromSeed(seed);
+    this.setState({
+      status: 'native callback received',
+      message: result,
+    });
   };
 
   pubKeyHashFromPKey = async (pKey) => {
     try {
-      return await ZkSync.publicKeyHashFromPrivateKey(pKey);
+      let result = await ZkSync.publicKeyHashFromPrivateKey(pKey);
+      this.setState({
+        status: 'native callback received',
+        message: result,
+      });
     } catch (e) {
       console.log(e);
     }
@@ -42,7 +40,11 @@ export default class App extends Component<{}> {
 
   signMusig = async (pKey, hexTxnMsg) => {
     try {
-      return await ZkSync.signMusig(pKey, hexTxnMsg);
+      let result = await ZkSync.signMusig(pKey, hexTxnMsg);
+      this.setState({
+        status: 'native callback received',
+        message: result,
+      });
     } catch (e) {
       console.log(e);
     }
@@ -50,7 +52,11 @@ export default class App extends Component<{}> {
 
   pubKeyFromPKey = async (pKey) => {
     try {
-      return await ZkSync.publicKeyFromPrivateKey(pKey);
+      let result = await ZkSync.publicKeyFromPrivateKey(pKey);
+      this.setState({
+        status: 'native callback received',
+        message: result,
+      });
     } catch (e) {
       console.log(e);
     }
@@ -64,18 +70,25 @@ export default class App extends Component<{}> {
         <View style={styles.btnWrapper}>
           <Button
             style={styles.btn}
+            testID="pubKeyHash"
             title="pub Key Hash"
             onPress={async () =>
-              console.log(await this.pubKeyHashFromPKey(hexPrivateKey))
+              console.log(await this.pubKeyHashFromPKey(TestData.hexPrivateKey))
             }
           />
         </View>
         <View style={styles.btnWrapper}>
           <Button
             style={styles.btn}
+            testID="signMusig"
             title="sign musig"
             onPress={async () =>
-              console.log(await this.signMusig(verifiedPKey, verifiedMsgByte))
+              console.log(
+                await this.signMusig(
+                  TestData.verifiedPKey,
+                  TestData.verifiedMsgByte,
+                ),
+              )
             }
           />
         </View>
@@ -83,17 +96,19 @@ export default class App extends Component<{}> {
           <Button
             style={styles.btn}
             title="seed to pkey"
+            testID="seedToPubKey"
             onPress={async () =>
-              console.log(await this.privateKeyFromSeed(hexSeed))
+              console.log(await this.privateKeyFromSeed(TestData.hexSeed))
             }
           />
         </View>
         <View style={styles.btnWrapper}>
           <Button
             style={styles.btn}
+            testID="pKeyToPubKey"
             title="pkey to pubkey"
             onPress={async () =>
-              console.log(await this.pubKeyFromPKey(hexPrivateKey))
+              console.log(await this.pubKeyFromPKey(TestData.verifiedPKey))
             }
           />
         </View>

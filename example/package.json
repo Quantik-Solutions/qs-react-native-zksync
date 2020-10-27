@@ -8,6 +8,7 @@
     "start": "react-native start",
     "start:clean": "watchman watch-del-all && react-native start --reset-cache",
     "test": "jest",
+    "test:android": "detox test -c android.emu.debug",
     "lint": "eslint ."
   },
   "dependencies": {
