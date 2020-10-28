@@ -1,120 +1,43 @@
 ---
 format_version: '8'
-default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: react-native
 trigger_map:
-- push_branch: '*'
+- push_branch: "*"
   workflow: primary
-- pull_request_source_branch: '*'
+- pull_request_source_branch: "*"
   workflow: primary
 workflows:
   deploy:
-    description: >
-      ## Configure Android part of the deploy workflow
-
-
-      To generate a signed APK:
-
-
-      1. Open the **Workflow** tab of your project on Bitrise.io
-
-      1. Add **Sign APK step right after Android Build step**
-
-      1. Click on **Code Signing** tab
-
-      1. Find the **ANDROID KEYSTORE FILE** section
-
-      1. Click or drop your file on the upload file field
-
-      1. Fill the displayed 3 input fields:
-
-      1. **Keystore password**
-
-      1. **Keystore alias**
-
-      1. **Private key password**
-
-      1. Click on **[Save metadata]** button
-
-
-      That's it! From now on, **Sign APK** step will receive your uploaded
-      files.
-
-
-      ## Configure iOS part of the deploy workflow
-
-
-      To generate IPA:
-
-
-      1. Open the **Workflow** tab of your project on Bitrise.io
-
-      1. Click on **Code Signing** tab
-
-      1. Find the **PROVISIONING PROFILE** section
-
-      1. Click or drop your file on the upload file field
-
-      1. Find the **CODE SIGNING IDENTITY** section
-
-      1. Click or drop your file on the upload file field
-
-      1. Click on **Workflows** tab
-
-      1. Select deploy workflow
-
-      1. Select **Xcode Archive & Export for iOS** step
-
-      1. Open **Force Build Settings** input group
-
-      1. Specify codesign settings
-
-      Set **Force code signing with Development Team**, **Force code signing
-      with Code Signing Identity**  
-
-      and **Force code signing with Provisioning Profile** inputs regarding to
-      the uploaded codesigning files
-
-      1. Specify manual codesign style
-
-      If the codesigning files, are generated manually on the Apple Developer
-      Portal,  
-
-      you need to explicitly specify to use manual coedsign settings  
-
-      (as ejected rn projects have xcode managed codesigning turned on).  
-
-      To do so, add 'CODE_SIGN_STYLE="Manual"' to 'Additional options for
-      xcodebuild call' input
-
-
-      ## To run this workflow
-
-
-      If you want to run this workflow manually:
-
-
-      1. Open the app's build list page
-
-      2. Click on **[Start/Schedule a Build]** button
-
-      3. Select **deploy** in **Workflow** dropdown input
-
-      4. Click **[Start Build]** button
-
-
-      Or if you need this workflow to be started by a GIT event:
-
-
-      1. Click on **Triggers** tab
-
-      2. Setup your desired event (push/tag/pull) and select **deploy** workflow
-
-      3. Click on **[Done]** and then **[Save]** buttons
-
-
-      The next change in your repository that matches any of your trigger map
-      event will start **deploy** workflow.
+    description: "## Configure Android part of the deploy workflow\n\nTo generate
+      a signed APK:\n\n1. Open the **Workflow** tab of your project on Bitrise.io\n1.
+      Add **Sign APK step right after Android Build step**\n1. Click on **Code Signing**
+      tab\n1. Find the **ANDROID KEYSTORE FILE** section\n1. Click or drop your file
+      on the upload file field\n1. Fill the displayed 3 input fields:\n1. **Keystore
+      password**\n1. **Keystore alias**\n1. **Private key password**\n1. Click on
+      **[Save metadata]** button\n\nThat's it! From now on, **Sign APK** step will
+      receive your uploaded files.\n\n## Configure iOS part of the deploy workflow\n\nTo
+      generate IPA:\n\n1. Open the **Workflow** tab of your project on Bitrise.io\n1.
+      Click on **Code Signing** tab\n1. Find the **PROVISIONING PROFILE** section\n1.
+      Click or drop your file on the upload file field\n1. Find the **CODE SIGNING
+      IDENTITY** section\n1. Click or drop your file on the upload file field\n1.
+      Click on **Workflows** tab\n1. Select deploy workflow\n1. Select **Xcode Archive
+      & Export for iOS** step\n1. Open **Force Build Settings** input group\n1. Specify
+      codesign settings\nSet **Force code signing with Development Team**, **Force
+      code signing with Code Signing Identity**  \nand **Force code signing with Provisioning
+      Profile** inputs regarding to the uploaded codesigning files\n1. Specify manual
+      codesign style\nIf the codesigning files, are generated manually on the Apple
+      Developer Portal,  \nyou need to explicitly specify to use manual coedsign settings
+      \ \n(as ejected rn projects have xcode managed codesigning turned on).  \nTo
+      do so, add 'CODE_SIGN_STYLE=\"Manual\"' to 'Additional options for xcodebuild
+      call' input\n\n## To run this workflow\n\nIf you want to run this workflow manually:\n\n1.
+      Open the app's build list page\n2. Click on **[Start/Schedule a Build]** button\n3.
+      Select **deploy** in **Workflow** dropdown input\n4. Click **[Start Build]**
+      button\n\nOr if you need this workflow to be started by a GIT event:\n\n1. Click
+      on **Triggers** tab\n2. Setup your desired event (push/tag/pull) and select
+      **deploy** workflow\n3. Click on **[Done]** and then **[Save]** buttons\n\nThe
+      next change in your repository that matches any of your trigger map event will
+      start **deploy** workflow.\n"
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
@@ -127,27 +50,27 @@ workflows:
         - command: install
     - install-missing-android-tools@2:
         inputs:
-        - gradlew_path: $PROJECT_LOCATION/gradlew
+        - gradlew_path: "$PROJECT_LOCATION/gradlew"
     - android-build@0:
         inputs:
-        - project_location: $PROJECT_LOCATION
+        - project_location: "$PROJECT_LOCATION"
     - certificate-and-profile-installer@1: {}
     - xcode-archive@2:
         inputs:
-        - project_path: $BITRISE_PROJECT_PATH
-        - scheme: $BITRISE_SCHEME
-        - export_method: $BITRISE_EXPORT_METHOD
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - export_method: "$BITRISE_EXPORT_METHOD"
         - configuration: Release
     - deploy-to-bitrise-io@1: {}
     - certificate-and-profile-installer@1: {}
     - recreate-user-schemes@1:
         inputs:
-        - project_path: $BITRISE_PROJECT_PATH
+        - project_path: "$BITRISE_PROJECT_PATH"
     - xcode-archive@2:
         inputs:
-        - project_path: $BITRISE_PROJECT_PATH
-        - scheme: $BITRISE_SCHEME
-        - export_method: $BITRISE_EXPORT_METHOD
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - export_method: "$BITRISE_EXPORT_METHOD"
         - configuration: Release
     - deploy-to-bitrise-io@1: {}
   primary:
@@ -166,7 +89,84 @@ workflows:
             # debug log
             set -x
 
+            # install rust
+            curl https://sh.rustup.rs -o rustup_init.sh
+
+            #sh ./rustup_init.sh --default-toolchain nightly -y
+            sh ./rustup_init.sh -y
+
+            source $HOME/.cargo/env
+
+            # Android targets
+            rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+            # iOS targets
+            rustup target add aarch64-apple-ios x86_64-apple-ios
+
+            cargo install cargo-ndk
+            cargo install cargo-lipo
+            cargo install cbindgen
+            bash ./android_build.sh
+
+            #bash ./rust_build.sh
+    - npm@1:
+        inputs:
+        - cache_local_deps: 'true'
+        - command: install -g detox-cli
+    - script@1:
+        title: Detox Util Install
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            brew tap wix/brew
+            brew install applesimutils
+    - yarn@0:
+        inputs:
+        - verbose_log: 'yes'
+        - command: install
+    - yarn@0:
+        inputs:
+        - workdir: example
+        - command: install
+    - react-native-bundle@1:
+        inputs:
+        - entry_file: example/index.${platform}.js
+        - platform: android
+    - script@1:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            detox build --configuration android.sim.release
+    - deploy-to-bitrise-io@1: {}
+  android:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - script@1:
+        title: Install Rust & Build Libraries
+        inputs:
+        - is_debug: 'yes'
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
             bash ./rust_build.sh
+
+            bash ./android_build.sh
+    - install-react-native@0: {}
     - npm@1:
         inputs:
         - cache_local_deps: 'true'
@@ -179,10 +179,74 @@ workflows:
         inputs:
         - workdir: example
         - command: install
+    - react-native-bundle@1:
+        inputs:
+        - entry_file: example/index.js
+        - platform: android
     - yarn@0:
         inputs:
         - workdir: example
-        - command: 'test:android'
+        - command: test:android
+    - deploy-to-bitrise-io@1: {}
+  ios:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - script@1:
+        title: Install Rust & Build Libraries
+        inputs:
+        - is_debug: 'yes'
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            bash ./rust_build.sh
+
+            bash ./ios_build.sh
+    - npm@1:
+        inputs:
+        - cache_local_deps: 'true'
+        - command: install -g detox-cli
+    - script@1:
+        title: Detox Util Install
+        inputs:
+        - is_debug: 'yes'
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            brew tap wix/brew
+            brew install applesimutils
+    - yarn@0:
+        inputs:
+        - verbose_log: 'yes'
+        - command: install
+    - yarn@0:
+        inputs:
+        - workdir: example
+        - verbose_log: 'yes'
+        - command: install
+    - react-native-bundle@1:
+        inputs:
+        - entry_file: example/index.js
+    - script@1:
+        inputs:
+        - is_debug: 'yes'
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            detox build --configuration ios.sim.release
     - deploy-to-bitrise-io@1: {}
 app:
   envs:

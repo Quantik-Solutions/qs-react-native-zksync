@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # set the version to use the library
 min_ver=23
+
+# Android targets
+rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
+
 # verify before executing this that you have the proper targets installed
 cargo ndk --target aarch64-linux-android --android-platform ${min_ver} -- build --release --manifest-path ./zksync/sdk/zksync-java/Cargo.toml
 cargo ndk --target armv7-linux-androideabi --android-platform ${min_ver} -- build --release --manifest-path ./zksync/sdk/zksync-java/Cargo.toml
