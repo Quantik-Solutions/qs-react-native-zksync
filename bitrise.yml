@@ -158,48 +158,15 @@ workflows:
     - script@1:
         title: Install Rust & Build Libraries
         inputs:
-        - content: >-
+        - is_debug: 'yes'
+        - content: |-
             #!/usr/bin/env bash
-
             # fail if any commands fails
-
             set -e
-
             # debug log
-
             set -x
 
-
-            # install rust
-
-            curl https://sh.rustup.rs -o rustup_init.sh
-
-
-            sh ./rustup_init.sh --default-toolchain nightly -y
-
-
-            source $HOME/.cargo/env
-
-
-            # Android targets
-
-            rustup target add aarch64-linux-android armv7-linux-androideabi
-            i686-linux-android x86_64-linux-android
-
-            # iOS targets
-
-            rustup target add aarch64-apple-ios armv7-apple-ios armv7s-apple-ios
-            x86_64-apple-ios i386-apple-ios
-
-
-            cargo install cargo-ndk
-
-            cargo install cargo-lipo
-
-            cargo install cbindgen
-
-
-            bash ./android_build.sh
+            bash ./rust_build.sh
     - npm@1:
         inputs:
         - cache_local_deps: 'true'
