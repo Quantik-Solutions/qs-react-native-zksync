@@ -67,7 +67,8 @@ fi
 if [ ! -a "${home}/.cargo/config.toml" ]; then
   echo "
   [build]
-  rustc-wrapper = "/usr/local/bin/sccache"
-  " >> config.toml
+  rustc-wrapper = /usr/local/bin/sccache
+  incremental = false
+  " >> "${home}"/.cargo/config.toml
 fi
 
