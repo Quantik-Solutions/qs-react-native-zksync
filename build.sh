@@ -6,11 +6,11 @@ set -x
 
 # Set the home variable
 home=$HOME
-if [ ! -d "/Users/vagrant" ]; then
-  home=/Users/vagrant
-else
-  exit 1
-fi
+#if [ ! -d "/Users/vagrant" ]; then
+#  home=/Users/vagrant
+#else
+#  exit 1
+#fi
 
 # Check for cargo folder
 if [ ! -d "${home}/.cargo" ]; then

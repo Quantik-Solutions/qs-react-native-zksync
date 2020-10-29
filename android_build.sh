@@ -3,11 +3,11 @@ min_ver=23
 
 # Set the home variable
 home=$HOME
-if [ ! -d "/Users/vagrant" ]; then
-  home=/Users/vagrant
-else
-  exit 1
-fi
+#if [ ! -d "/Users/vagrant" ]; then
+#  home=/Users/vagrant
+#else
+#  exit 1
+#fi
 
 # Make sure we have rust in scope
 source "${home}"/.cargo/env
