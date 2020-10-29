@@ -2,9 +2,6 @@
 format_version: '8'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: react-native
-trigger_map:
-- push_branch: ios
-  workflow: ios
 workflows:
   android:
     steps:
@@ -14,55 +11,24 @@ workflows:
     - cache-pull@2:
         inputs:
         - is_debug_mode: 'true'
+    - brew-install@0:
+        inputs:
+        - cache_enabled: 'yes'
+        - verbose_log: 'yes'
+        - packages: sccache
     - script@1:
         title: Install Rust & Build Libraries
         inputs:
         - is_debug: 'yes'
-        - content: |-
+        - content: |
             #!/usr/bin/env bash
             # fail if any commands fails
             set -e
             # debug log
             set -x
-            # install rust
-            curl https://sh.rustup.rs -o rustup_init.sh
 
-            #sh ./rustup_init.sh --default-toolchain nightly -y
-            sh ./rustup_init.sh -y
-
-            source $HOME/.cargo/env
-
-            cargo install cargo-ndk
-            cargo install cargo-lipo
-            cargo install cbindgen
-
-
-            # Android targets
-            rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android
-
-            cd ./zksync/sdk/zksync-java
-            # verify before executing this that you have the proper targets installed
-            cargo ndk --target aarch64-linux-android --android-platform 23 -- build --release
-            cargo ndk --target armv7-linux-androideabi --android-platform 23 -- build --release
-            cargo ndk --target i686-linux-android --android-platform 23 -- build --release
-            cargo ndk --target x86_64-linux-android --android-platform 23 -- build --release
-            # moving libraries to the android project
-
-            jniLibs=$HOME/android/src/main/jniLibs
-            libName=libzksync.so
-
-            rm -rf ${jniLibs}
-
-            mkdir ${jniLibs}
-            mkdir ${jniLibs}/arm64-v8a
-            mkdir ${jniLibs}/armeabi-v7a
-            mkdir ${jniLibs}/x86
-            mkdir ${jniLibs}/x86_64
-
-            cp ./target/aarch64-linux-android/release/${libName} ${jniLibs}/arm64-v8a/${libName}
-            cp ./target/armv7-linux-androideabi/release/${libName} ${jniLibs}/armeabi-v7a/${libName}
-            cp ./target/i686-linux-android/release/${libName} ${jniLibs}/x86/${libName}
-            cp ./target/x86_64-linux-android/release/${libName} ${jniLibs}/x86_64/${libName}
+            bash ./build.sh
+            bash ./android_build.sh
     - install-react-native@0: {}
     - npm@1:
         inputs:
@@ -80,6 +46,14 @@ workflows:
         inputs:
         - entry_file: example/index.js
         - platform: android
+    - cache-push@2:
+        inputs:
+        - is_debug_mode: 'true'
+        - compress_archive: 'true'
+        - cache_paths: |-
+            $CARGO_INSTALL_DIR
+            $SCCACHE_DIR
+        is_always_run: true
     - script@1:
         title: Detox Utils
         inputs:
@@ -94,21 +68,23 @@ workflows:
             brew tap wix/brew
             brew install applesimutils
 
-            cd example
-            detox build --configuration android.emu.debug
-            detox test --configuration android.emu.debug --cleanup
-    - cache-push@2:
-        inputs:
-        - is_debug_mode: 'true'
-        - cache_paths: "$CARGO_INSTALL_DIR\n"
-        is_always_run: true
+            cd $TEST_PROJECT_ROOT
+            detox build --configuration android.emu.release.bitrise
+            detox test --configuration android.emu.release.bitrise --cleanup
     - deploy-to-bitrise-io@1: {}
   ios:
     steps:
     - activate-ssh-key@4:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
     - git-clone@4: {}
-    - brew-install@0: {}
+    - cache-pull@2:
+        inputs:
+        - is_debug_mode: 'true'
+    - brew-install@0:
+        inputs:
+        - cache_enabled: 'yes'
+        - verbose_log: 'yes'
+        - packages: sccache
     - script@1:
         title: Install Rust & Build Libraries
         inputs:
@@ -120,9 +96,9 @@ workflows:
             # debug log
             set -x
 
-            bash ./rust_build.sh
-
-            bash ./ios_build.sh
+            bash $PROJECT_ROOT/build.sh
+            bash $PROJECT_ROOT/ios_build.sh
+    - install-react-native@0: {}
     - npm@1:
         inputs:
         - cache_local_deps: 'true'
@@ -130,17 +106,26 @@ workflows:
     - yarn@0:
         inputs:
         - verbose_log: 'yes'
+        - cache_local_deps: 'yes'
         - command: install
     - yarn@0:
         inputs:
         - workdir: example
-        - verbose_log: 'yes'
         - command: install
     - react-native-bundle@1:
         inputs:
         - entry_file: example/index.js
+        - platform: android
+    - cache-push@2:
+        inputs:
+        - is_debug_mode: 'true'
+        - compress_archive: 'true'
+        - cache_paths: |-
+            $CARGO_INSTALL_DIR
+            $SCCACHE_DIR
+        is_always_run: true
     - script@1:
-        title: Detox Util Install
+        title: Detox Utils
         inputs:
         - is_debug: 'yes'
         - content: |-
@@ -153,14 +138,15 @@ workflows:
             brew tap wix/brew
             brew install applesimutils
 
-            detox build --configuration ios.sim.release
-            detox test --configuration ios.sim.release --cleanup
+            cd $TEST_PROJECT_ROOT
+            detox build --configuration android.emu.debug
+            detox test --configuration android.emu.debug --cleanup
     - deploy-to-bitrise-io@1: {}
 app:
   envs:
   - opts:
       is_expand: false
-    PROJECT_LOCATION: example/android
+    PROJECT_LOCATION: "/Users/vagrant/git/example/android"
   - opts:
       is_expand: false
     MODULE: Example / Base Testing Application
@@ -179,3 +165,24 @@ app:
   - opts:
       is_expand: false
     CARGO_INSTALL_DIR: "/Users/vagrant/.cargo"
+  - opts:
+      is_expand: false
+    NATIVE_MODULE_ANDROID_DIR: "/Users/vagrant/git/android"
+  - opts:
+      is_expand: false
+    SCCACHE_DIR: "/Users/vagrant/sccache_dir"
+  - opts:
+      is_expand: false
+    TEST_PROJECT_ROOT: "/Users/vagrant/git/example"
+  - opts:
+      is_expand: false
+    PROJECT_ROOT: "/Users/vagrant/git"
+  - opts:
+      is_expand: false
+    ZKSYNC_LIB_DIR: "/Users/vagrant/git/zksync/sdk/zksync-java"
+  - opts:
+      is_expand: false
+    DEBUG_APK: "/Users/vagrant/git/example/android/app/build/outputs/apk/debug/app-debug.apk"
+trigger_map:
+- push_branch: ios
+  workflow: ios
