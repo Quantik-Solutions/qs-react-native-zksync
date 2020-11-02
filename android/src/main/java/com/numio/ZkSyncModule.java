@@ -8,7 +8,7 @@ public class ZkSyncModule extends ReactContextBaseJavaModule {
     public ZkSyncModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        System.loadLibrary("zksync");
+        System.loadLibrary("zksyncsign");
     }
 
     @Override
