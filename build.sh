@@ -65,9 +65,5 @@ else
 fi
 
 if [ ! -a "${home}/.cargo/config.toml" ]; then
-  echo '
-[build]
-rustc-wrapper = "/usr/local/bin/sccache"
-incremental = false
-' >>"${home}"/.cargo/config.toml
+  cp "$PROJECT_ROOT"/cargo_config.toml "${home}"/.cargo/config.toml
 fi
