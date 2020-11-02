@@ -23,6 +23,12 @@
       "build": "cd android && ./gradlew -q assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
       "type": "android.attached",
       "name": "emulator-5554"
+    },
+    "ios.sim.debug": {
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/SampleProjectReactNative.app",
+      "build": "xcodebuild -project ios/SampleProjectReactNative.xcodeproj -scheme SampleProjectReactNative -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -UseNewBuildSystem=NO",
+      "type": "ios.simulator",
+      "name": "iPhone 10"
     }
   }
 }
