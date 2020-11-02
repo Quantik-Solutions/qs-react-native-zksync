@@ -9,7 +9,7 @@ cargo ndk --target x86_64-linux-android --android-platform ${min_ver} -- build -
 # moving libraries to the android project
 
 jniLibs=../../../android/src/main/jniLibs
-libName=libzksync.so
+libName=libzksyncsign.so
 
 rm -rf ${jniLibs}
 

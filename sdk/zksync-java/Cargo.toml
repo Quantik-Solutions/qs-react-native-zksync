@@ -5,7 +5,7 @@ authors = ["Nicholas Vincent <emailnjv@gmail.com>"]
 edition = "2018"
 
 [lib]
-name = "zksync"
+name = "zksyncsign"
 crate-type = ["staticlib", "cdylib"]
 
 [dependencies]
