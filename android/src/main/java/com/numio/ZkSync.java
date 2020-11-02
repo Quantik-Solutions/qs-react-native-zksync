@@ -25,7 +25,6 @@ public class ZkSync {
         ZkSync.privateKeyFromSeed(this, seed);
     }
 
-
     public void publicKeyFromPrivateKey(String privateKey) {
         ZkSync.publicKeyFromPrivateKey(this, privateKey);
     }

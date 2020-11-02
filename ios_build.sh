@@ -22,15 +22,18 @@ rustup target add aarch64-apple-ios x86_64-apple-ios
 cd "$ZKSYNC_LIB_DIR" || exit 1
 
 # Create C headers & package into iOS library release
-cbindgen src/lib.rs -l c > ZkSync.h
+cbindgen src/lib.rs -l c > ZkSyncSign.h
 cargo lipo --release
 
 # Move results into native module directory to be used
 inc=$PROJECT_ROOT/ios/include
 libs=$PROJECT_ROOT/ios/libs
 
+rm -rf "${inc}"
+rm -rf "${inc}"
+
 mkdir "${inc}"
 mkdir "${libs}"
 
-cp ZkSync.h "${inc}"
-cp "$ZKSYNC_LIB_DIR"/target/universal/release/libzksync.a "${libs}"
+cp ZkSyncSign.h "${inc}"
+cp "$ZKSYNC_LIB_DIR"/target/universal/release/libzksyncsign.a "${libs}"
