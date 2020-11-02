@@ -24,5 +24,8 @@ Pod::Spec.new do |s|
   s.dependency "React"
   # ...
   # s.dependency "..."
+  s.subspec "ZkSyncSign" do |zks|
+    zks.vendored_libraries = "ios/libs/libzksyncsign.a"
+    zks.source_files   = 'ios/include/ZkSyncSign.{h,m}'
 end
 
