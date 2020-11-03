@@ -1,3 +1,0 @@
-[submodule "zksync"]
-	path = zksync
-	url = git@github.com:TeamNumio/zksync.git
