@@ -19,6 +19,7 @@ source "${home}"/.cargo/env
 rustup target add aarch64-apple-ios x86_64-apple-ios
 
 # Go to zkSync library directory to build
+# ZKSYNC_LIB_DIR === zksync/sdk/zksync-java
 cd "$ZKSYNC_LIB_DIR" || exit 1
 
 # Create C headers & package into iOS library release
