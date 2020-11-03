@@ -4,16 +4,8 @@ set -e
 # debug log
 set -x
 
-# Set the home variable
-home=$HOME
-#if [ ! -d "/Users/vagrant" ]; then
-#  home=/Users/vagrant
-#else
-#  exit 1
-#fi
-
 # Check for cargo folder
-if [ ! -d "${home}/.cargo" ]; then
+if [ ! -d "$HOME/.cargo" ]; then
   echo "Installing Rust"
 
   # install rust
@@ -25,7 +17,7 @@ else
 fi
 
 # shellcheck disable=SC1090
-source "${home}"/.cargo/env
+source "$HOME"/.cargo/env
 rustup default nightly
 
 # Check for needed cargo utils
@@ -53,17 +45,20 @@ fi
 # iOS targets
 rustup target add aarch64-apple-ios x86_64-apple-ios
 
+cwd=$(pwd)
+ZKSYNC_LIB_DIR="${cwd}"/zksync/sdk/zksync-java
 # Go to zkSync library directory to build
 # ZKSYNC_LIB_DIR === zksync/sdk/zksync-java
-cd "./zksync/sdk/zksync-java" || exit 1
+cd "${ZKSYNC_LIB_DIR}" || exit 1
+
 
 # Create C headers & package into iOS library release
 cbindgen src/lib.rs -l c > ZkSyncSign.h
 cargo lipo --release
 
 # Move results into native module directory to be used
-inc=../../../ios/include
-libs=../../../ios/libs
+inc="${cwd}"/ios/include
+libs="${cwd}"/ios/libs
 
 rm -rf "${inc}"
 rm -rf "${inc}"
@@ -72,4 +67,4 @@ mkdir "${inc}"
 mkdir "${libs}"
 
 cp ZkSyncSign.h "${inc}"
-cp "$ZKSYNC_LIB_DIR"/target/universal/release/libzksyncsign.a "${libs}"
+cp "${ZKSYNC_LIB_DIR}"/target/universal/release/libzksyncsign.a "${libs}"
