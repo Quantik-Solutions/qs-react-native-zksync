@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+     - '*'
+
+jobs:
+  ci-all:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: link-setup-keys
+      run: ln -s ~/setup keys/setup
+
+    - name: setup-env
+      run: |
+        echo "::set-env name=ZKSYNC_HOME::$(pwd)"
+        echo "::set-env name=PATH::$(echo `pwd`/bin:$PATH)"
+        echo "::set-env name=CI::1"
+
+    - name: update-deps
+      run: |
+        rustup update stable
+        cargo sqlx --version || cargo install --version=0.1.0-beta.1 sqlx-cli
+
+    - name: lints
+      run: |
+        zksync db-setup # So database will be created for compilation.
+        zksync dummy-prover ensure-disabled
+        cargo fmt --all -- --check
+        # For some reason, `cargo clippy` currently doesn't work in sqlx offline mod. So, we're checking it in online mode.
+        f cargo clippy --tests --benches -- -D warnings
+        pushd sdk/zksync-crypto
+        cargo fmt -- --check
+        cargo clippy --all --tests --benches -- -D warnings
+
+    - name: init
+      run: zksync init
+
+    - name: js-tests
+      run: zksync js-tests
+
+    - name: zcli-tests
+      run: ci-zcli.sh
+
+    - name: integration-tests
+      run: ci-integration-tests.sh
+
+    - name: data-restore
+      run: zksync data-restore check-existing
+
+    - name: integration-testkit
+      run: zksync integration-testkit
+
+    - name: test-contracts
+      run: zksync test-contracts
+
+    - name: rust-tests
+      run: f cargo test --release
+
+    - name: rust-sdk-tests
+      run: zksync rust-sdk-tests
+
+    - name: zksync-crypto-tests
+      run: pushd sdk/zksync-crypto && f cargo test --release
+
+    - name: db-tests
+      run: zksync db-test
+
+    - name: prover-tests
+      run: zksync prover-tests
+
+    - name: circuit-tests
+      run: zksync circuit-tests "" `nproc`
+
+    services:
+      geth:
+        image: matterlabs/geth:latest
+        ports:
+          - 8545:8545
+          - 8546:8546
+        env:
+          CONFIG: standard
+
+      postgres:
+        image: postgres:10.4
+        ports:
+          - 5432:5432
+
+      dev-ticker:
+        image: matterlabs/dev-ticker:latest
+        ports:
+          - 9876:9876
