@@ -50,4 +50,4 @@ core/lib/storage/.env
 
 sdk/zksync-java/Makefile
 
-sdk/zksync.js/.npmrc
+**/.npmrc

@@ -1,6 +1,6 @@
 import { Signature } from "./types";
 // @ts-ignore
-import ZkSync from '@quantik-solutions/react-native-zksync';
+import ZkSync from '@teamnumio/react-native-zksync';
 import { utils } from "ethers";
 
 export async function privateKeyFromSeed(privateKey: Uint8Array): Promise<Uint8Array> {
