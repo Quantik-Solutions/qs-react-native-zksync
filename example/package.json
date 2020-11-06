@@ -8,11 +8,12 @@
     "start": "react-native start",
     "start:clean": "watchman watch-del-all && react-native start --reset-cache",
     "test": "jest",
-    "test:android": "detox test -c android.emu.debug",
+    "test:android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug --cleanup",
+    "test:ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug --cleanup",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@quantik-solutions/react-native-zksync": "link:..",
+    "@teamnumio/react-native-zksync": "link:../",
     "react": "16.13.1",
     "react-native": "0.63.3"
   },

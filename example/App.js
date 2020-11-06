@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import ZkSync from '@quantik-solutions/react-native-zksync';
+import ZkSync from '@teamnumio/react-native-zksync';
 import TestData from './testData.json';
 
 export default class App extends Component<{}> {

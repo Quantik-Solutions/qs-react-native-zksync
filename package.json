@@ -1,5 +1,5 @@
 {
-  "name": "@quantik-solutions/react-native-zksync",
+  "name": "@teamnumio/react-native-zksync",
   "title": "React Native Zksync",
   "version": "0.0.1",
   "description": "TODO",
@@ -16,11 +16,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Quantik-Solutions/react-native-zksync.git",
-    "baseUrl": "https://github.com/Quantik-Solutions/react-native-zksync"
+    "url": "git+https://github.com/TeamNumio/react-native-zksync.git",
+    "baseUrl": "https://github.com/TeamNumio/react-native-zksync"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/Quantik-Solutions"
+    "registry": "https://npm.pkg.github.com/TeamNumio"
   },
   "keywords": [
     "react-native"
