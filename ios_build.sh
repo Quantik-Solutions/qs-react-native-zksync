@@ -31,7 +31,7 @@ inc=$PROJECT_ROOT/ios/include
 libs=$PROJECT_ROOT/ios/libs
 
 rm -rf "${inc}"
-rm -rf "${inc}"
+rm -rf "${libs}"
 
 mkdir "${inc}"
 mkdir "${libs}"
