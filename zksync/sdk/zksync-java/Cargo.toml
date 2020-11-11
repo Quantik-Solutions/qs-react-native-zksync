@@ -15,7 +15,6 @@ rand = "0.4"
 
 hex = "0.4"
 sha2 = "0.8"
-openssl = { version = "0.10", features = ["vendored"] }
 
 crypto_lib = { package = "zksync_crypto", path = "../../core/lib/crypto" }
 
