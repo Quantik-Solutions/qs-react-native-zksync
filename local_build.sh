@@ -82,7 +82,7 @@ inc="${CWD}"/ios/include
 libs="${CWD}"/ios/libs
 
 rm -rf "${inc}"
-rm -rf "${inc}"
+rm -rf "${libs}"
 
 mkdir "${inc}"
 mkdir "${libs}"
