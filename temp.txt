@@ -1,0 +1,119 @@
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock-name = "native-tls"
+zksync/Cargo.lock-version = "0.2.4"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "2b0d88c06fe90d5ee94048ba40409ef1d9315d86f6f38c2efdaad4fb50c58b2d"
+zksync/Cargo.lock-dependencies = [
+zksync/Cargo.lock- "lazy_static",
+zksync/Cargo.lock- "libc",
+zksync/Cargo.lock- "log 0.4.11",
+zksync/Cargo.lock: "openssl",
+zksync/Cargo.lock: "openssl-probe",
+zksync/Cargo.lock: "openssl-sys",
+zksync/Cargo.lock- "schannel",
+zksync/Cargo.lock- "security-framework",
+zksync/Cargo.lock- "security-framework-sys",
+zksync/Cargo.lock- "tempfile",
+zksync/Cargo.lock-]
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock-name = "nb-connect"
+zksync/Cargo.lock-version = "1.0.2"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+--
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "2839e79665f131bdb5782e51f2c6c9599c133c6098982a54c794358bf432529c"
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock-name = "opaque-debug"
+zksync/Cargo.lock-version = "0.3.0"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "624a8340c38c1b80fd549087862da4ba43e08858af025b236e509b6649fc13d5"
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock:name = "openssl"
+zksync/Cargo.lock-version = "0.10.30"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "8d575eff3665419f9b83678ff2815858ad9d11567e082f5ac1814baba4e2bcb4"
+zksync/Cargo.lock-dependencies = [
+zksync/Cargo.lock- "bitflags 1.2.1",
+zksync/Cargo.lock- "cfg-if 0.1.10",
+zksync/Cargo.lock- "foreign-types",
+zksync/Cargo.lock- "lazy_static",
+zksync/Cargo.lock- "libc",
+zksync/Cargo.lock: "openssl-sys",
+zksync/Cargo.lock-]
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock:name = "openssl-probe"
+zksync/Cargo.lock-version = "0.1.2"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "77af24da69f9d9341038eba93a073b1fdaaa1b788221b00a69bce9e762cb32de"
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock:name = "openssl-sys"
+zksync/Cargo.lock-version = "0.9.58"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "a842db4709b604f0fe5d1170ae3565899be2ad3d9cbc72dedc789ac0511f78de"
+zksync/Cargo.lock-dependencies = [
+zksync/Cargo.lock- "autocfg 1.0.1",
+zksync/Cargo.lock- "cc",
+zksync/Cargo.lock- "libc",
+zksync/Cargo.lock- "pkg-config",
+zksync/Cargo.lock- "vcpkg",
+zksync/Cargo.lock-]
+--
+zksync/Cargo.lock- "sct",
+zksync/Cargo.lock- "webpki",
+zksync/Cargo.lock-]
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock-name = "rustls-native-certs"
+zksync/Cargo.lock-version = "0.3.0"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "a75ffeb84a6bd9d014713119542ce415db3a3e4748f0bfce1e1416cd224a23a5"
+zksync/Cargo.lock-dependencies = [
+zksync/Cargo.lock: "openssl-probe",
+zksync/Cargo.lock- "rustls",
+zksync/Cargo.lock- "schannel",
+zksync/Cargo.lock- "security-framework",
+zksync/Cargo.lock-]
+zksync/Cargo.lock-
+zksync/Cargo.lock-[[package]]
+zksync/Cargo.lock-name = "ryu"
+zksync/Cargo.lock-version = "1.0.5"
+zksync/Cargo.lock-source = "registry+https://github.com/rust-lang/crates.io-index"
+zksync/Cargo.lock-checksum = "71d301d4193d031abdd79ff7e3dd721168a9572ef3fe51a1517aba235bd8f86e"
+--
+zksync/docker/exit-tool/Dockerfile-# syntax=docker/dockerfile:experimental
+zksync/docker/exit-tool/Dockerfile-FROM debian:buster-slim
+zksync/docker/exit-tool/Dockerfile-
+zksync/docker/exit-tool/Dockerfile-WORKDIR /usr/src/zksync
+zksync/docker/exit-tool/Dockerfile-
+zksync/docker/exit-tool/Dockerfile-# Prepare dependencies
+zksync/docker/exit-tool/Dockerfile:RUN apt-get update && apt-get install -y bash git nodejs npm postgresql openssl libssl-dev gcc g++ curl libpq-dev pkg-config software-properties-common axel
+zksync/docker/exit-tool/Dockerfile-RUN apt-get install -y libpq5 ca-certificates && rm -rf /var/lib/apt/lists/*
+zksync/docker/exit-tool/Dockerfile-RUN npm install -g yarn
+zksync/docker/exit-tool/Dockerfile-
+zksync/docker/exit-tool/Dockerfile-# Install Rust and required cargo packages
+zksync/docker/exit-tool/Dockerfile-ENV RUSTUP_HOME=/usr/local/rustup \
+zksync/docker/exit-tool/Dockerfile-    CARGO_HOME=/usr/local/cargo \
+zksync/docker/exit-tool/Dockerfile-    PATH=/usr/local/cargo/bin:$PATH
+zksync/docker/exit-tool/Dockerfile-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+zksync/docker/exit-tool/Dockerfile-RUN cargo install diesel_cli --no-default-features --features postgres
+zksync/docker/exit-tool/Dockerfile-RUN cargo install --version=0.1.0-beta.1 sqlx-cli
+--
+zksync/docker/ci/Dockerfile-FROM fedora:30
+zksync/docker/ci/Dockerfile-ENV PATH="/root/.cargo/bin:${PATH}"
+zksync/docker/ci/Dockerfile:RUN dnf install -y  gettext nodejs nodejs-yarn axel jq postgresql libpq-devel rust make openssl-devel git python gcc-c++ docker which && dnf clean all \
+zksync/docker/ci/Dockerfile-  && curl https://sh.rustup.rs -sSf | bash -s -- -y \
+zksync/docker/ci/Dockerfile-  && ln -s /usr/bin/nodejs-yarn /usr/bin/yarn
+zksync/docker/ci/Dockerfile-
+zksync/docker/ci/Dockerfile-RUN cargo install diesel_cli --no-default-features --features postgres
+zksync/docker/ci/Dockerfile-RUN cargo install wasm-pack
+zksync/docker/ci/Dockerfile-
+zksync/docker/ci/Dockerfile-# sccache support
+zksync/docker/ci/Dockerfile-RUN cargo install sccache
+zksync/docker/ci/Dockerfile-ENV RUSTC_WRAPPER=/root/.cargo/bin/sccache
+zksync/docker/ci/Dockerfile-ENV SCCACHE_DIR=/drone/src/target/rust-ci-cache/sccache
