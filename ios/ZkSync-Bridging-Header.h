@@ -1,2 +1,2 @@
 #import <React/RCTBridgeModule.h>
-#import "include/ZkSyncSign.h"
+#import "ZkSyncSign.h"

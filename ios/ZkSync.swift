@@ -24,7 +24,7 @@ class ZkSync: NSObject {
 
     @objc(privateKeyFromSeed:withResolver:withRejecter:)
     func privateKeyFromSeed(seed: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        let result = private_key_from_seed(seed, txnMsg);
+        let result = private_key_from_seed(seed);
         let privateKey = String(cString: result!)
         string_release(UnsafeMutablePointer(mutating: result))
         resolve(privateKey);
@@ -32,7 +32,7 @@ class ZkSync: NSObject {
 
     @objc(publicKeyFromPrivateKey:withResolver:withRejecter:)
     func publicKeyFromPrivateKey(privateKey: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        let result = public_key_from_private_key(privateKey, txnMsg);
+        let result = public_key_from_private_key(privateKey);
         let publickKey = String(cString: result!)
         string_release(UnsafeMutablePointer(mutating: result))
         resolve(publickKey);

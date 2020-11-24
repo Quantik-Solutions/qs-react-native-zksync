@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B1A91F3256C4A2D00B04F8D /* libzksyncsign.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1A91F2256C4A2D00B04F8D /* libzksyncsign.a */; };
+		4BBB161A256DD1F90001D4E9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BBB1619256DD1F90001D4E9 /* libresolv.tbd */; };
 		F4FF95D7245B92E800C19C63 /* ZkSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* ZkSync.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libZkSync.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libZkSync.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B1A91F2256C4A2D00B04F8D /* libzksyncsign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzksyncsign.a; path = include/libzksyncsign.a; sourceTree = "<group>"; };
+		4BBB1619256DD1F90001D4E9 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
 		B3E7B5891CC2AC0600A0062D /* ZkSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZkSync.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* ZkSync-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZkSync-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* ZkSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkSync.swift; sourceTree = "<group>"; };
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BBB161A256DD1F90001D4E9 /* libresolv.tbd in Frameworks */,
 				4B1A91F3256C4A2D00B04F8D /* libzksyncsign.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +57,7 @@
 		4B1A91F1256C4A2D00B04F8D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BBB1619256DD1F90001D4E9 /* libresolv.tbd */,
 				4B1A91F2256C4A2D00B04F8D /* libzksyncsign.a */,
 			);
 			name = Frameworks;
