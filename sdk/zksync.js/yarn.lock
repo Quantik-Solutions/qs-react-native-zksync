@@ -418,6 +418,11 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@teamnumio/react-native-zksync@0.0.1":
+  version "0.0.1"
+  resolved "https://npm.pkg.github.com/download/@teamnumio/react-native-zksync/0.0.1/8afdbd26ec1338d6dcd8b46a0fabe875c6d83d85b2213fc3978d47b2e763ca31#ebc470e766df5f05e6539c8adfe66b1146336647"
+  integrity sha512-uxqfDVobA+pVFnff952yyAuq1xc4kW/HURy5jgyLH8bI5I4rCeFT4U9nWcLOod0oUfCOm0jpx9foSq81aoSxcQ==
+
 "@types/chai@^4.1.7":
   version "4.2.13"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.2.13.tgz#8a3801f6655179d1803d81e94a2e4aaf317abd16"
@@ -1887,8 +1892,3 @@ yn@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/yn/-/yn-3.1.1.tgz#1e87401a09d767c1d5eab26a6e4c185182d2eb50"
   integrity sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
-
-zksync-crypto@^0.3.1:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/zksync-crypto/-/zksync-crypto-0.3.2.tgz#2e073d1c42a09f65efe41119e3e065edff87fb95"
-  integrity sha512-fLNZ82wddyevNe9O6WEB0Ls3DnttkJH5s7E1tXXq9mGHMVSn/oMHFn35BD6ZRBhALdLexKbalWoJ89Ua93yzFg==

@@ -524,7 +524,7 @@ export class Wallet {
         }
     }
 
-    async approveERC20TokenDeposits(token: TokenLike): Promise<ContractTransaction> {
+    async approveERC20TokenDeposits(token: TokenLike,ethTxOptions): Promise<ContractTransaction> {
         if (isTokenETH(token)) {
             throw Error("ETH token does not need approval.");
         }
@@ -532,7 +532,7 @@ export class Wallet {
         const erc20contract = new Contract(tokenAddress, IERC20_INTERFACE, this.ethSigner);
 
         try {
-            return erc20contract.approve(this.provider.contractAddress.mainContract, MAX_ERC20_APPROVE_AMOUNT);
+            return erc20contract.approve(this.provider.contractAddress.mainContract, MAX_ERC20_APPROVE_AMOUNT,ethTxOptions);
         } catch (e) {
             this.modifyEthersError(e);
         }
@@ -570,12 +570,16 @@ export class Wallet {
             const tokenAddress = this.provider.tokenSet.resolveTokenAddress(deposit.token);
             // ERC20 token deposit
             const erc20contract = new Contract(tokenAddress, IERC20_INTERFACE, this.ethSigner);
-            let nonce;
+            let nonce
+            if(deposit.ethTxOptions && deposit.ethTxOptions.nonce) {
+                nonce = deposit.ethTxOptions.nonce
+            }
+            
             if (deposit.approveDepositAmountForERC20) {
                 try {
                     const approveTx = await erc20contract.approve(
                         this.provider.contractAddress.mainContract,
-                        deposit.amount
+                        deposit.amount,{nonce:nonce}
                     );
                     nonce = approveTx.nonce + 1;
                 } catch (e) {

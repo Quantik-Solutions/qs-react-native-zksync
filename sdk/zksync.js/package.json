@@ -1,6 +1,6 @@
 {
     "name": "@teamnumio/zksync",
-    "version": "0.0.20",
+    "version": "0.0.23",
     "license": "MIT",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/TeamNumio"
