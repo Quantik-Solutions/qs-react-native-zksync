@@ -524,7 +524,7 @@ export class Wallet {
         }
     }
 
-    async approveERC20TokenDeposits(token: TokenLike,ethTxOptions): Promise<ContractTransaction> {
+    async approveERC20TokenDeposits(token: TokenLike,ethTxOptions?): Promise<ContractTransaction> {
         if (isTokenETH(token)) {
             throw Error("ETH token does not need approval.");
         }
