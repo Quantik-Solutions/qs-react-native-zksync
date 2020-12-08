@@ -10,7 +10,7 @@ RCT_EXTERN_METHOD(publicKeyHashFromPrivateKey:(NSString *)pKey
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(signMusig:(NSString *)pKey
+RCT_EXTERN_METHOD(signMusigg:(NSString *)pKey
                  (NSString *)txnMsg
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)

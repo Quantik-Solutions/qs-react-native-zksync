@@ -9,15 +9,6 @@ export default class App extends Component<{}> {
     message: '',
   };
 
-  componentDidMount() {
-    ZkSync.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message,
-      });
-    });
-  }
-
   privateKeyFromSeed = async (seed) => {
     let result = await ZkSync.privateKeyFromSeed(seed);
     this.setState({
@@ -40,7 +31,7 @@ export default class App extends Component<{}> {
 
   signMusig = async (pKey, hexTxnMsg) => {
     try {
-      let result = await ZkSync.signMusig(pKey, hexTxnMsg);
+      let result = await ZkSync.signMusigg(pKey, hexTxnMsg);
       this.setState({
         status: 'native callback received',
         message: result,
