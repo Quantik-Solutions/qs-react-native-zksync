@@ -1,6 +1,6 @@
 {
     "name": "@teamnumio/zksync",
-    "version": "0.0.24",
+    "version": "0.0.26",
     "license": "MIT",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/TeamNumio"
@@ -12,7 +12,7 @@
     "main": "build/index.js",
     "types": "build/index.d.ts",
     "dependencies": {
-        "@teamnumio/react-native-zksync": "0.0.1",
+        "@teamnumio/react-native-zksync": "0.0.2",
         "axios": "^0.19.0",
         "websocket": "^1.0.30",
         "websocket-as-promised": "^0.10.1"
@@ -29,7 +29,7 @@
         "@types/mocha": "^5.2.7",
         "@types/node": "^12.6.8",
         "chai": "^4.2.0",
-        "ethers": "^5.0.0",
+        "ethers": "^5.0.23",
         "mocha": "^6.2.0",
         "prettier": "1.18.2",
         "rollup": "^2.26.3",
