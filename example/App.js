@@ -31,7 +31,7 @@ export default class App extends Component<{}> {
 
   signMusig = async (pKey, hexTxnMsg) => {
     try {
-      let result = await ZkSync.signMusigg(pKey, hexTxnMsg);
+      let result = await ZkSync.signMusig(pKey, hexTxnMsg);
       this.setState({
         status: 'native callback received',
         message: result,

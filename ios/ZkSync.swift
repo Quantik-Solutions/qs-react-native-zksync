@@ -14,8 +14,8 @@ class ZkSync: NSObject {
         resolve(pubKeyHash);
     }
 
-    @objc(signMusigg:txnMsg:withResolver:withRejecter:)
-    func signMusigg(_ privateKey: String, txnMsg: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
+    @objc(signMusig:txnMsg:withResolver:withRejecter:)
+    func signMusig(_ privateKey: String, txnMsg: String, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
         let result = sign_musig(privateKey, txnMsg);
         let signedBytes = String(cString: result!)
         string_release(UnsafeMutablePointer(mutating: result))
