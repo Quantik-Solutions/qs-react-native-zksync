@@ -11,7 +11,7 @@ RCT_EXTERN_METHOD(publicKeyHashFromPrivateKey:(NSString *)pKey
                  withRejecter:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(signMusigg:(NSString *)pKey
-                 (NSString *)txnMsg
+                 txnMsg: (NSString *)txnMsg
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
 

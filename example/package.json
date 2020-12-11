@@ -9,7 +9,7 @@
     "start:clean": "watchman watch-del-all && react-native start --reset-cache",
     "test": "jest",
     "test:android": "detox build --configuration android.emu.debug && detox test --configuration android.emu.debug --cleanup",
-    "test:ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug --cleanup",
+    "test:ios": "detox build --configuration ios.sim.release && detox test --configuration ios.sim.release --cleanup",
     "lint": "eslint ."
   },
   "dependencies": {
