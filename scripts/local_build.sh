@@ -5,7 +5,7 @@ set -e
 set -x
 
 CWD=$(pwd)
-ZKSYNC_LIB_DIR="${CWD}"/zksync/sdk/zksync-java
+ZKSYNC_LIB_DIR="${CWD}"/zksync/sdk/zksync-native
 TEST_APP_DIR="${CWD}"/example
 
 # Check for cargo folder
@@ -70,7 +70,7 @@ cd "${TEST_APP_DIR}" || exit 1
 yarn
 
 # Go to zkSync library directory to build
-# ZKSYNC_LIB_DIR === zksync/sdk/zksync-java
+# ZKSYNC_LIB_DIR === zksync/sdk/zksync-native
 cd "${ZKSYNC_LIB_DIR}" || exit 1
 
 # Create C headers & package into iOS library release

@@ -62,7 +62,7 @@
 		9D923FB364108BC0F84390FE /* Pods-example-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-tvOS.release.xcconfig"; path = "Target Support Files/Pods-example-tvOS/Pods-example-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ACE277377D8DEC1EBB30FE65 /* Pods-example-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-example-tvOSTests/Pods-example-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2DBF4D7F287877027CAFC7B /* Pods-example-exampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.debug.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B405A96D257F178100119215 /* libzksyncsign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzksyncsign.a; path = "../../zksync/sdk/zksync-java/target/universal/release/libzksyncsign.a"; sourceTree = "<group>"; };
+		B405A96D257F178100119215 /* libzksyncsign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzksyncsign.a; path = "../../zksync/sdk/zksync-native/target/universal/release/libzksyncsign.a"; sourceTree = "<group>"; };
 		BCFA048895945A888E869118 /* Pods-example-exampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-exampleTests.release.xcconfig"; path = "Target Support Files/Pods-example-exampleTests/Pods-example-exampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		D100CBF074360804D372F6FB /* Pods-example-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-example-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-example-tvOSTests/Pods-example-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D2985F3D9FC6DF087FEC6F14 /* libPods-example-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-example-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -665,8 +665,8 @@
 				LD_VERIFY_BITCODE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/dev/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-java/target/universal/release",
-					"/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-java/target/universal/release",
+					"/Users/dev/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-native/target/universal/release",
+					"/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-native/target/universal/release",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)/**",
 				);
 				"LIBRARY_SEARCH_PATHS[arch=*]" = (
@@ -731,8 +731,8 @@
 				LD_VERIFY_BITCODE = NO;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/dev/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-java/target/universal/release",
-					"/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-java/target/universal/release",
+					"/Users/dev/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-native/target/universal/release",
+					"/Users/dev-user/Desktop/qs-react-native-zksync/zksync/sdk/zksync-native/target/universal/release",
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)/**",
 				);
 				OTHER_LDFLAGS = (

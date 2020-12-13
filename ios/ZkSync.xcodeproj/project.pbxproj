@@ -31,7 +31,7 @@
 		4BBB1619256DD1F90001D4E9 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
 		B3E7B5891CC2AC0600A0062D /* ZkSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZkSync.m; sourceTree = "<group>"; };
 		B405A929257F0F0C00119215 /* zksyncsign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zksyncsign.h; sourceTree = "<group>"; };
-		B405A973257F18C700119215 /* libzksyncsign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzksyncsign.a; path = "../zksync/sdk/zksync-java/target/universal/release/libzksyncsign.a"; sourceTree = "<group>"; };
+		B405A973257F18C700119215 /* libzksyncsign.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzksyncsign.a; path = "../zksync/sdk/zksync-native/target/universal/release/libzksyncsign.a"; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* ZkSync-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZkSync-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* ZkSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZkSync.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */

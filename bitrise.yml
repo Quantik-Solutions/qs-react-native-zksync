@@ -379,7 +379,7 @@ app:
     PROJECT_ROOT: "/Users/vagrant/git"
   - opts:
       is_expand: false
-    ZKSYNC_LIB_DIR: "/Users/vagrant/git/zksync/sdk/zksync-java"
+    ZKSYNC_LIB_DIR: "/Users/vagrant/git/zksync/sdk/zksync-native"
   - opts:
       is_expand: false
     DEBUG_APK: "/Users/vagrant/git/example/android/app/build/outputs/apk/debug/app-debug.apk"
