@@ -48,6 +48,6 @@ go_to_env.sh
 
 core/lib/storage/.env
 
-sdk/zksync-java/Makefile
+sdk/zksync-native/Makefile
 
 **/.npmrc

@@ -1,5 +1,5 @@
 [package]
-name = "zksync-java"
+name = "zksync-native"
 version = "0.1.0"
 authors = ["Nicholas Vincent <emailnjv@gmail.com>"]
 edition = "2018"

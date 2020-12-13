@@ -1,3 +1,4 @@
+#![cfg(target_os = "ios")]
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
 use crate::sign::{
