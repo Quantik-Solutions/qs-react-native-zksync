@@ -1,7 +1,7 @@
 {
   "name": "@teamnumio/react-native-zksync",
   "title": "React Native Zksync",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TODO",
   "main": "index.js",
   "files": [
@@ -9,7 +9,9 @@
     "android",
     "index.js",
     "ios",
-    "react-native-zksync.podspec"
+    "react-native-zksync.podspec",
+    "scripts",
+    "zksync"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
